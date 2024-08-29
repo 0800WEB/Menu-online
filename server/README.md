@@ -15,7 +15,7 @@ Este proyecto es el backend para un sistema de menú online. Permite gestionar p
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/usuario/Menu-online.git
+   git clone https://github.com/0800WEB/Menu-online.git
    cd Menu-online/backend
    ```
 
