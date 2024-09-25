@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import MobileActionBar from '../components/MobileActionBar'
 import FooterDesktop from '../components/FooterDesktop'
+import SectionIndicator from '../components/SectionIndicator'
 
 const Layout = () => {
     return (
@@ -9,7 +10,8 @@ const Layout = () => {
             <header>
                 <Navbar />
             </header>
-            <main className='max-w-full overflow-hidden sm:overflow-visible px-9 sm:px-20 md:px-[8.75rem] py-9'>
+            <main className='h-full flex flex-col max-w-full overflow-hidden sm:overflow-visible px-9 sm:px-20 md:px-[8.75rem] py-9 grow sm:grow-0'>
+                <SectionIndicator />
                 <Outlet />
             </main>
 

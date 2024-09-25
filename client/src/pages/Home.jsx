@@ -3,8 +3,8 @@ import MenuCatalog from "../components/MenuCatalog"
 
 const Home = () => {
     return (
-        <div className="h-full">
-            <section className="hidden sm:flex flex-col lg:flex-row h-[65vh] lg:h-[45vh]  ">
+        <div id="home" className="h-full overflow-hidden">
+            <section className="hidden sm:flex flex-col lg:flex-row h-[65vh] lg:h-[45vh]">
                 <div className="h-1/2 lg:h-full lg:w-1/2 flex flex-col gap-4 lg:gap-6">
                     <div className="flex flex-col gap-4 xl:w-9/12 ">
                         <h1 className="sm:text-4xl md:leading-[3rem] lg:text-[2.5rem] font-black text-pretty lg:text-balance">

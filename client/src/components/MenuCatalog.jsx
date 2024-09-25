@@ -3,7 +3,7 @@ import { foodCardData } from "../assets/other-assets/mookMenus";
 
 const MenuCatalog = () => {
     return (
-        <div className="overflow-y-scroll scrollbar-hide sm:overflow-auto  h-full bg-yellow-100 flex flex-wrap justify-center sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-[1.125rem] sm:gap-x-6 gap-y-2 sm:gap-y-7 justify-items-center">
+        <div className="h-full overflow-y-scroll scrollbar-hide sm:overflow-auto bg-yellow-100 flex flex-wrap justify-center sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-[1.125rem] sm:gap-x-6 gap-y-2 sm:gap-y-7 justify-items-center">
             {
                 foodCardData.map((menu, index) => {
                     return (
