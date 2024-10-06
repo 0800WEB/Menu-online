@@ -1,8 +1,5 @@
-import React from 'react';
-
 const AverageReviewScore = ({ score, totalReviews }) => {
     const filledStars = Math.floor(score);
-    const halfStar = score % 1 !== 0;
     const totalStars = 5;
 
     return (
@@ -35,12 +32,10 @@ const AverageReviewScore = ({ score, totalReviews }) => {
                                     </svg>
                                 ))}
                             </div>
-
-                            {/* Barra de progreso de la estrella a la izquierda */}
                             <div className="h-2 w-24 bg-gray-300 rounded-xl overflow-hidden">
                                 <div
                                     className="h-full bg-grayPrimary rounded-xl transition-all"
-                                    style={{ width: `${widthPercentage}%` }} // Aplicamos el porcentaje calculado
+                                    style={{ width: `${widthPercentage}%` }}
                                 ></div>
                             </div>
                         </div>
