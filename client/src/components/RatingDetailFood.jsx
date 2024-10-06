@@ -4,7 +4,7 @@ import { BUTTON_TEXT_LEAVE_REVIEW, TITLE_RATING_DETAIL } from "../utils/consts/c
 import ButtonSecondary from "./Buttons/ButtonSecondary";
 import ReviewCard from "./ReviewCard";
 
-const RatingDetailFood = ({ reviews = [] }) => {
+const RatingDetailFood = ({ reviews, toggleReviewVisibility }) => {
     const averageReviewScore = calculateAverageScore(reviews);
 
     return (
@@ -22,7 +22,7 @@ const RatingDetailFood = ({ reviews = [] }) => {
                 <p className="text-gray-600">{NO_REVIEWS_AVAILABLE_MESSAGE}</p>
             )}
             <div className="mx-auto">
-                <ButtonSecondary textChildren={BUTTON_TEXT_LEAVE_REVIEW} />
+                <ButtonSecondary textChildren={BUTTON_TEXT_LEAVE_REVIEW} onClick={() => toggleReviewVisibility()} />
             </div>
 
         </div>

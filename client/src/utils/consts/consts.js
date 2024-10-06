@@ -1,4 +1,5 @@
 export const PROMOTION_TITLE = "Descuentos";
+export const BEST_RATED_PRODUCTS_TITLE = "Mejores Calificados";
 
 //Para componente Card3D
 export const RECOMMENDED_TAG = "recommended"; //Para las cards que utlizaran dos tipos de Tags para el diseño de las Card3D , este seria para los descuentos o recomendados, cambiaria los estilos
@@ -10,6 +11,7 @@ export const DEFAULT_DESCRIPTION = "Descripción del plato no disponible.";
 export const BUTTON_TEXT_REVIEWS = "Reseñas";
 export const BUTTON_TEXT_LEAVE_REVIEW = "Déjanos tu Reseña";
 export const BUTTON_TEXT_BACK = "Volver";
+export const ARROW_TO_BACK_BUTTON = '\u2190'
 export const PRICE_CURRENCY = "USD";
 
 //Para componente ReviewForm
@@ -24,8 +26,7 @@ export const STAR_EMPTY_COLOR = "text-gray-400";
 //Para componente RatingDetailFood
 export const TITLE_RATING_DETAIL = "Reseñas";
 export const NO_REVIEWS_AVAILABLE_MESSAGE = "No hay reseñas disponibles.";
-
-
+export const CUSTOMER_FEEDBACK_LABEL = "Valoraciones";
 //Para Componente Profile
 export const EDIT_PROFILE_TEXT = "Editar Perfil";
 export const ORDER_HISTORY_TEXT = "Historial de Pedidos";

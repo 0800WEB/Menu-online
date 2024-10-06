@@ -3,6 +3,7 @@ import ButtonSecondary from "./Buttons/ButtonSecondary";
 import ReviewForm from "./ReviewForm";
 import RatingDetailFood from "./RatingDetailFood";
 import {
+    ARROW_TO_BACK_BUTTON,
     BUTTON_TEXT_BACK,
     BUTTON_TEXT_LEAVE_REVIEW,
     BUTTON_TEXT_REVIEWS,
@@ -15,7 +16,7 @@ const DetailFood = ({ id, foodTitle, img, description, price, reviewScore, close
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [showReviews, setShowReviews] = useState(false);
 
-    const handleReviewClick = () => {
+    const toggleReviewSubmissionModalVisibility = () => {
         setShowReviewForm(!showReviewForm);
         setShowReviews(false); // Restablecer la vista de reseñas al ocultar el formulario.  
     };
@@ -26,7 +27,7 @@ const DetailFood = ({ id, foodTitle, img, description, price, reviewScore, close
     };
 
     return (
-        <div className="flex flex-col px-9 pt-9 pb-[4.7rem] h-full bg-orange-300 relative overflow-y-auto">
+        <div className="flex flex-col px-9 pt-9 pb-[4.7rem] h-full relative overflow-y-auto">
             <div className="w-full h-[35%] rounded-custom-1 overflow-hidden">
                 <img className="size-full object-cover" src={img} alt={`${foodTitle} image`} />
             </div>
@@ -48,12 +49,12 @@ const DetailFood = ({ id, foodTitle, img, description, price, reviewScore, close
                             <ButtonSecondary
                                 textChildren={BUTTON_TEXT_LEAVE_REVIEW}
                                 typeButton={"button"}
-                                onClick={handleReviewClick}
+                                onClick={toggleReviewSubmissionModalVisibility}
                             />
                         </div>
-                        <div className="mx-auto">
+                        <div className="w-full absolute bottom-4 left-0 px-9">
                             <ButtonSecondary
-                                textChildren={BUTTON_TEXT_BACK}
+                                textChildren={ARROW_TO_BACK_BUTTON}
                                 typeButton={"button"}
                                 onClick={closeDetails}
                             />
@@ -62,22 +63,24 @@ const DetailFood = ({ id, foodTitle, img, description, price, reviewScore, close
                 ) : showReviews ? (
                     // Mostrar las reseñas  
                     <div className="absolute top-0 right-0 h-full w-full bg-red-500 flex flex-col items-center justify-center">
-                        <RatingDetailFood reviews={reviewScore} />
-                        <ButtonSecondary
-                            textChildren={BUTTON_TEXT_BACK}
-                            typeButton={"button"}
-                            onClick={() => setShowReviews(false)}
-                        />
+                        <div className="w-full px-9 absolute bottom-4">
+                            <ButtonSecondary
+                                textChildren={ARROW_TO_BACK_BUTTON}
+                                typeButton={"button"}
+                                onClick={() => setShowReviews(false)}
+                            />
+                        </div>
+                        <RatingDetailFood reviews={reviewScore} toggleReviewVisibility={toggleReviewSubmissionModalVisibility} />
                     </div>
                 ) : (
                     // Mostrar el formulario de reseñas  
-                    <div className="flex flex-col gap-3 min-h-[30%] mt-3">
+                    <div className="h-full flex flex-col min-h-[30%]">
                         <ReviewForm />
-                        <div className="mx-auto pt-2 mt-auto">
+                        <div className="w-full absolute bottom-4">
                             <ButtonSecondary
-                                textChildren={BUTTON_TEXT_BACK}
+                                textChildren={ARROW_TO_BACK_BUTTON}
                                 typeButton={"button"}
-                                onClick={handleReviewClick}
+                                onClick={toggleReviewSubmissionModalVisibility}
                             />
                         </div>
                     </div>

@@ -4,9 +4,19 @@ import MobileActionBar from '../components/MobileActionBar'
 import FooterDesktop from '../components/FooterDesktop'
 import SectionIndicator from '../components/SectionIndicator'
 import ScrollDownArrow from '../components/ScrollDownArrow'
-
+import { fetchListFoods } from '../utils/api/handlersRequests/handlerFoods'
+import { useEffect } from 'react'
+import { setAllProducts } from '../state/slices/products/products'
+import { useDispatch, useSelector } from 'react-redux'
 const Layout = () => {
+    
+    const dispatch = useDispatch();
 
+    const products = useSelector((state) => state.products.items);
+
+    useEffect(() => {
+        fetchListFoods(products, dispatch, setAllProducts);
+    }, [dispatch, products]);
 
     return (
         <div className="flex flex-col h-screen sm:h-max ">

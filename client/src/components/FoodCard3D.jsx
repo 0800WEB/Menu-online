@@ -8,10 +8,9 @@ import { RECOMMENDED_TAG } from '../utils/consts/consts'
 import { calculateAverageScore } from '../utils/functions/caculateScoreFood'
 import '../styles/slideUp.css'
 
-const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promoted }) => {
+const FoodCard3D = ({ id , foodTitle, img, description, price, reviewScore, promoted }) => {
 
     const [openDetails, setOpenDetails] = useState(false)
-
 
     const imageSizeClasses = promoted !== RECOMMENDED_TAG
         ? 'size-[9.5rem] sm:size-[13.3rem]'
@@ -22,8 +21,7 @@ const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promo
         : 'max-w-40 sm:w-[11.4rem]';
 
 
-    const averageReviewScore = calculateAverageScore(reviewScore);
-
+    const averageReviewScore = parseInt(calculateAverageScore(reviewScore));
 
     return (
         <div className={`${containerClasses} flex flex-col sm:gap-2 rounded-custom-1 w-max h-max shadow-md overflow-hidden pb-1 sm:pb-2 bg-white bg-opacity-40`}>
