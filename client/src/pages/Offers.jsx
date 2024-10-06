@@ -1,13 +1,13 @@
-import PromotionsPreview from "../components/PromotionsPreview"
-import TopRatedPreview from "../components/TopRatedPreview"
+import PromotionsPreview from "../components/PromotionsPreview";
+import TopRatedPreview from "../components/TopRatedPreview";
 
 const Offers = () => {
     return (
-        <div className="h-full overflow-y-scroll scrollbar-hide bg-red-300 flex flex-col [&>div]:h-1/2 gap-5">
+        <div className="relative h-full overflow-y-scroll scrollbar-hide flex flex-col [&>div]:min-h-max gap-5 justify-around" >
             <TopRatedPreview />
             <PromotionsPreview />
         </div>
-    )
-}
+    );
+};
 
-export default Offers
+export default Offers;
