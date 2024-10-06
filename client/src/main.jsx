@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import store from './state/store/store.js'
 import App from './components/App.jsx'
 import './styles/index.css'
+import './styles/fonts.css'
+
 
 
 createRoot(document.getElementById('root')).render(

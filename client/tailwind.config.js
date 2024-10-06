@@ -18,7 +18,11 @@ export default {
         customMediumToBottom: "0px 7px 20px 0px rgba(0, 0, 0, 0.15)",
         customMediumToTop: "7px 0px 20px 0px rgba(0, 0, 0, 0.15)",
       },
+      lineClamp: {
+        8: "8",
+        10: "10"
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
