@@ -1,11 +1,12 @@
+import { CUSTOMER_FEEDBACK_LABEL } from "../utils/consts/consts";
 const AverageReviewScore = ({ score, totalReviews }) => {
     const filledStars = Math.floor(score);
     const totalStars = 5;
 
     return (
-        <div className="flex items-center border border-gray-300 rounded-lg p-4">
+        <div className="flex items-center border-t border-b border-gray-300 py-1">
             <div className="h-full flex flex-col justify-between items-center">
-                <span className="text-gray-500">Valoraciones</span>
+                <span className="text-gray-500">{CUSTOMER_FEEDBACK_LABEL}</span>
                 <div>
 
                     <span className="text-gray-600 font-semibold text-3xl"> {score}</span>

@@ -20,8 +20,8 @@ const ReviewForm = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg w-full  mx-auto">
-            <h2 className="text-xl font-bold mb-4">{FORM_TITLE}</h2>
+        <div className="h-full flex flex-col items-center justify-between p-6 bg-white  w-full">
+            <h2 className="text-xl font-bold">{FORM_TITLE}</h2>
             <form onSubmit={handleSubmit} className="w-full">
                 <input
                     type="text"
