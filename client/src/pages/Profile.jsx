@@ -8,7 +8,7 @@ import {
     ADDRESSES_TEXT,
     LOGOUT_TEXT
 } from "../utils/consts/consts";
-import GoogleLoginButton from "../components/GoogleLoginButton";
+import Login from "./Login";
 
 const Profile = () => {
     const USER_NAME = userMock.name;
@@ -73,7 +73,8 @@ const Profile = () => {
             <div className="px-5 pb-5 mx-auto">
                 <ButtonSecondary textChildren={LOGOUT_TEXT} onClick={handleLogout} className="w-full bg-red-500 text-white hover:bg-red-600" />
             </div> */}
-            <GoogleLoginButton />
+            <Login />
+
         </div>
     );
 };

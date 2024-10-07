@@ -38,3 +38,10 @@ export const LOGOUT_TEXT = "Cerrar Sesión";
 export const SENDER_CHEF = "chef";
 export const SENDER_USER = "user";
 export const TITLE_CHATBOT = "Chef";
+
+//Para Login
+export const TITLE_LOGIN = "Iniciar Sesion";
+export const REMEMBER_ME_LABEL = "Recuerdame";
+export const FORGOT_PASSWORD_TEXT = "Olvidaste la contraseña?";
+export const LOGIN_BUTTON_TEXT = "Iniciar";
+export const LOGIN_WITH_TEXT = "O inicia con";
