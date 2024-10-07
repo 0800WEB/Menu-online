@@ -1,30 +1,37 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { baseURL } from '../config';
 import { authApiServer } from '../utils/api/consts/auth';
+import { AuthContext } from '../contextAuth/AuthContext';
+import { setUser } from '../state/slices/user/user';
+import { useDispatch } from 'react-redux';
+import { handleLogout } from '../contextAuth/handleLogout';
 
 const GoogleLoginButton = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
+
+    const { login } = useContext(AuthContext);
+
+    const dispatch = useDispatch()
 
     const handleSuccess = async (response) => {
         setLoading(true);
-        const token = response.credential; // Asegúrate de que este token es el correcto
+        const token = response.credential;
 
         try {
-            const res = await axios.post(`${baseURL}${authApiServer}`, { tokenId: token }); // Asegúrate de que la clave sea 'tokenId'
-            console.log('Usuario autenticado en el backend:', res.data);
+            const res = await axios.post(`${baseURL}${authApiServer}`, { tokenId: token });
+            const user = res.data.user
+            dispatch(setUser(user))
             localStorage.setItem('authToken', res.data.token);
+            localStorage.setItem('userData', JSON.stringify(user));
 
-            // Guardar la fecha de expiración (6 horas)
             const expirationDate = new Date();
             expirationDate.setHours(expirationDate.getHours() + 6);
             localStorage.setItem('tokenExpiration', expirationDate.toISOString());
 
-            // Establecer el mensaje de éxito
-            setSuccessMessage('¡Inicio de sesión exitoso!');
+            login();
         } catch (error) {
             console.error('Error al enviar el token al backend:', error);
             if (error.response) {
@@ -47,23 +54,16 @@ const GoogleLoginButton = () => {
         return new Date() > new Date(expirationDate);
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('tokenExpiration');
-        console.log('Usuario cerró sesión');
-        setSuccessMessage('');
-    };
-
     useEffect(() => {
         const interval = setInterval(() => {
             if (isTokenExpired()) {
-                console.error('El token ha expirado. Por favor, inicia sesión nuevamente.');
-                handleLogout();
+                handleLogout(dispatch);
             }
-        }, 15000); // Verificar cada minuto
+        }, 60000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [dispatch]);
+
 
     return (
         <div>
@@ -72,18 +72,6 @@ const GoogleLoginButton = () => {
                 onError={handleError}
                 cookiePolicy={"single_host_policy"}
             />
-            {loading && <div>Cargando...</div>}
-            {error && <div className="text-red-500">{error}</div>}
-
-            {successMessage && (
-                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-green-500 text-white text-2xl">
-                    {successMessage}
-                    <button
-                        className="ml-3 text-sm font-bold"
-                        onClick={handleLogout}
-                    >Cerrar sesion</button>
-                </div>
-            )}
         </div>
     );
 };
