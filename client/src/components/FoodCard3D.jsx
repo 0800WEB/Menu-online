@@ -5,6 +5,7 @@ import DetailFood from './DetailFood'
 import { RECOMMENDED_TAG } from '../utils/consts/consts'
 import { calculateAverageScore } from '../utils/functions/caculateScoreFood'
 import '../styles/slideUp.css'
+import { useNavigate } from 'react-router-dom'
 
 const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promoted }) => {
 
@@ -29,9 +30,15 @@ const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promo
                     <div className='absolute bottom-0 left-0' aria-label="3D Icon">
                     </div>
                     <div className='absolute top-4 right-2 p bg-white rounded-full shadow-md' aria-label="More details icon" >
-                        <p className='font-bold text-lg p-1 px-[0.4rem] tracking-tighter'>3D</p>
+                        <button onClick={(e) => {
+                            e.stopPropagation();
+                            window.open('https://ar-code.com/dDTxhJRrc', '_blank');
+                        }}>
+                            <p className='font-bold text-lg p-1 px-[0.4rem] tracking-tighter'>3D</p>
+                        </button>
                     </div>
                 </div>
+
                 <div className='flex flex-col gap-2 px-1'>
                     <RatingStars rating={averageReviewScore} />
                     <div className='flex flex-col sm:flex-row gap-[1px] sm:justify-between mt-1 w-full'>
