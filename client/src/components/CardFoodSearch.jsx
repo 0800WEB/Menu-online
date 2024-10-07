@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DetailFood from './DetailFood';
-import { calculateAverageScore } from '../utils/functions/caculateScoreFood'
 
 const CardFoodSearch = ({ id, title, image, price, description, reviews }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
 
   const toggleDescription = () => setShowFullDescription((prev) => !prev);
-  
+
   const handleCardClick = () => {
     setOpenDetails(true);
   };
 
   return (
     <div>
-      <div 
-        className="card bg-white rounded-lg shadow-md p-4 flex flex-row justify-between items-center transition-transform transform cursor-pointer"
+      <div
+        className="bg-white py-4 flex flex-row justify-between items-center transition-transform transform cursor-pointer"
         onClick={handleCardClick}
       >
         <div className="flex flex-col w-2/3 pr-4">
@@ -44,7 +43,7 @@ const CardFoodSearch = ({ id, title, image, price, description, reviews }) => {
               {showFullDescription ? 'Ver menos...' : 'Ver más...'}
             </strong>
           </div>
-          
+
           <p className="text-gray-900 font-bold mt-2">${price}</p>
         </div>
 
