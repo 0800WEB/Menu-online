@@ -2,7 +2,7 @@ const reviews = [
   {
     user: "UsuarioA",
     score: 5,
-    opinion: "¡Increíble! El sushi estaba fresco y delicioso.",
+    opinion: "¡Increíble! El platillo llego fresco y delicioso.",
   },
   {
     user: "UsuarioB",
