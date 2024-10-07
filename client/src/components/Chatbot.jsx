@@ -14,43 +14,36 @@ const Chatbot = ({ closeChatBot }) => {
     const messagesEndRef = useRef(null); // Ref para el final del contenedor de mensajes
 
     const handleSend = async () => {
-    if (input.trim()) {
-      const userMessage = { text: input, sender: "user" };
-      setMessages((prev) => [...prev, userMessage]);
-      setInput("");
-      setLoading(true);
+        if (input.trim()) {
+            const userMessage = { text: input, sender: SENDER_USER };
+            setMessages((prev) => [...prev, userMessage]);
+            setInput("");
+            setLoading(true);
 
-      try {
-        const response = await fetch('http://localhost:4000/api/chatbot', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ message: input })
-        });
+            try {
+                const response = await fetch('http://localhost:4000/api/chatbot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: input })
+                });
 
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const botMessage = { text: data.response, sender: SENDER_CHEF };
+                setMessages((prev) => [...prev, botMessage]);
+            } catch (error) {
+                console.error('Error al enviar el mensaje:', error);
+                const errorMessage = { text: "Lo siento, hubo un error al procesar tu mensaje.", sender: SENDER_CHEF };
+                setMessages((prev) => [...prev, errorMessage]);
+            } finally {
+                setLoading(false);
+            }
         }
-
-        const data = await response.json();
-        const botMessage = { text: data.response, sender: "bot" };
-        setMessages((prev) => [...prev, botMessage]);
-      } catch (error) {
-        console.error('Error al enviar el mensaje:', error);
-        const errorMessage = { text: "Lo siento, hubo un error al procesar tu mensaje.", sender: "bot" };
-        setMessages((prev) => [...prev, errorMessage]);
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
-
-    const getChefResponse = (userInput) => {
-        if (userInput.toLowerCase().includes("postres")) {
-            return { text: "Por supuesto, ofrecemos una amplia variedad de postres. ¿Estás buscando alguno en específico?", sender: SENDER_CHEF };
-        }
-        return { text: "Lo siento, no tengo información sobre eso. ¿Te gustaría preguntar otra cosa?", sender: SENDER_CHEF };
     };
 
     useEffect(() => {
