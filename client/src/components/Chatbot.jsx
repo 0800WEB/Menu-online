@@ -9,37 +9,48 @@ const Chatbot = ({ closeChatBot }) => {
     const [messages, setMessages] = useState([
         { text: "Hola, soy el Chef. ¿Te gustaría que te hiciera una recomendación?", sender: SENDER_CHEF }
     ]);
+    const [loading, setLoading] = useState(false);
     const [input, setInput] = useState("");
     const messagesEndRef = useRef(null); // Ref para el final del contenedor de mensajes
 
-    const handleSend = () => {
-        if (input.trim() === "") return;
+    const handleSend = async () => {
+    if (input.trim()) {
+      const userMessage = { text: input, sender: "user" };
+      setMessages((prev) => [...prev, userMessage]);
+      setInput("");
+      setLoading(true);
 
-        const userMessage = { text: input, sender: SENDER_USER };
-        setMessages(prevMessages => [...prevMessages, userMessage]);
-        setInput("");
-
-        // Simular una petición HTTP para obtener la respuesta del Chef
-        simulateApiRequest(input).then(chefResponse => {
-            setMessages(prevMessages => [...prevMessages, chefResponse]);
+      try {
+        const response = await fetch('http://localhost:4000/api/chatbot', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: input })
         });
-    };
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const botMessage = { text: data.response, sender: "bot" };
+        setMessages((prev) => [...prev, botMessage]);
+      } catch (error) {
+        console.error('Error al enviar el mensaje:', error);
+        const errorMessage = { text: "Lo siento, hubo un error al procesar tu mensaje.", sender: "bot" };
+        setMessages((prev) => [...prev, errorMessage]);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
     const getChefResponse = (userInput) => {
         if (userInput.toLowerCase().includes("postres")) {
             return { text: "Por supuesto, ofrecemos una amplia variedad de postres. ¿Estás buscando alguno en específico?", sender: SENDER_CHEF };
         }
         return { text: "Lo siento, no tengo información sobre eso. ¿Te gustaría preguntar otra cosa?", sender: SENDER_CHEF };
-    };
-
-    // Función para simular una petición a una API
-    const simulateApiRequest = (userInput) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                const response = getChefResponse(userInput);
-                resolve(response);
-            }, 1000); // Simula un retardo de 1 segundo
-        });
     };
 
     useEffect(() => {

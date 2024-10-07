@@ -1,11 +1,25 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+
+import categoryRoutes from './routes/categoryRoutes.js' ;
+import chatRoutes from './routes/chatRoutes.js' ;
+import productRoutes from './routes/productRoutes.js' ;
+import reviewRoutes from './routes/reviewRoutes.js' ;
+import userRoutes from './routes/userRoutes.js' ;
+
+// Initializations
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(cors());
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+// Middleware para parsear JSON
+app.use(express.json());
+
+// Routes
+app.use('/api/categories', categoryRoutes);
+app.use('/api/chatbot', chatRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/users', userRoutes);
+
+export default app; 
