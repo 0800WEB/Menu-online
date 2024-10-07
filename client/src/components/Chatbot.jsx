@@ -7,7 +7,7 @@ import { SENDER_CHEF, SENDER_USER, TITLE_CHATBOT } from '../utils/consts/consts'
 
 const Chatbot = ({ closeChatBot }) => {
     const [messages, setMessages] = useState([
-        { text: "Hola, soy el Chef. ¿Te gustaría que te hiciera una recomendación?", sender: SENDER_CHEF }
+        { text: "¡Hola! Soy tu chef virtual, ¿En qué puedo ayudarte hoy?", sender: SENDER_CHEF }
     ]);
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState("");
