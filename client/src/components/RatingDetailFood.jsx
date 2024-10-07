@@ -8,7 +8,7 @@ const RatingDetailFood = ({ reviews, toggleReviewVisibility }) => {
     const averageReviewScore = calculateAverageScore(reviews);
 
     return (
-        <div className="w-full h-full p-9 pb-12  bg-white flex flex-col justify-between">
+        <div className="w-full h-full py-3   bg-white flex flex-col justify-between">
             <AverageReviewScore score={averageReviewScore} totalReviews={5} />
             <h3 className="text-lg font-bold">{TITLE_RATING_DETAIL}</h3>
             {reviews.length > 0 ? (

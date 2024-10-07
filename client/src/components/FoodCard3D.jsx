@@ -61,7 +61,7 @@ const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promo
                         img={img}
                         price={price}
                         reviewScore={reviewScore}
-                        closeDetails={() => setOpenDetails(!openDetails)}
+                        closeDetails={() => setOpenDetails(openDetails)}
                     />
                 </div>
             )}

@@ -61,7 +61,7 @@ const DetailFood = ({ id, foodTitle, img, description, price, reviewScore, close
                     </div>
                 ) : showReviews ? (
                     // Mostrar las reseñas  
-                    <div className="absolute top-0 right-0 h-full w-full bg-red-500 flex flex-col items-center justify-center">
+                    <div className="h-full w-full flex flex-col items-center justify-center">
                         <div className="w-full px-9 absolute bottom-4">
                             <ButtonSecondary
                                 textChildren={ARROW_TO_BACK_BUTTON}

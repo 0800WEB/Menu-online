@@ -20,15 +20,15 @@ const ReviewForm = () => {
     };
 
     return (
-        <div className="h-full flex flex-col items-center justify-between p-6 bg-white  w-full">
+        <div className="h-full flex flex-col items-center justify-between w-full gap-7 mt-7">
             <h2 className="text-xl font-bold">{FORM_TITLE}</h2>
-            <form onSubmit={handleSubmit} className="w-full">
+            <form onSubmit={handleSubmit} className="w-full grow">
                 <input
                     type="text"
                     placeholder={NAME_PLACEHOLDER}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full p-3 mb-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
+                    className="w-full p-3 mb-5 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
                 />
                 <textarea
                     placeholder={REVIEW_PLACEHOLDER}
@@ -37,7 +37,7 @@ const ReviewForm = () => {
                     className="w-full p-3 mb-4 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-300"
                     rows="4"
                 />
-                <div className="flex items-center mb-4">
+                <div className="flex items-center mb-8">
                     <p className="mr-2">{RATING_LABEL}</p>
                     <div className="flex">
                         {[1, 2, 3, 4, 5].map((star) => (
@@ -48,7 +48,7 @@ const ReviewForm = () => {
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                                 strokeWidth="2"
-                                className={`w-6 h-6 cursor-pointer ${star <= rating ? STAR_FILLED_COLOR : STAR_EMPTY_COLOR}`}
+                                className={`size-5 cursor-pointer ${star <= rating ? STAR_FILLED_COLOR : STAR_EMPTY_COLOR}`}
                                 onClick={() => setRating(star)}
                             >
                                 <path
