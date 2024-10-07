@@ -14,7 +14,7 @@ const chatController = async (req, res) => {
 
     const systemMessages = [
       { role: "system", content: "Eres un chatbot para un restaurante llamado 'Menu-Online-BACK'." },
-      { role: "system", content: `Estos son los platos disponibles: PIZZA ` } // ${productsDescriptions}
+      { role: "system", content: `Estos son los platos disponibles: ${productsDescriptions} ` }
     ];
 
     conversationHistory.push(...systemMessages);
