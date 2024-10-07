@@ -19,14 +19,14 @@ const LoginBoton = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative ">
       {isLoggingOut && (
         <div className="absolute top-0 left-0 right-0 flex justify-center items-center bg-white p-2 rounded-md shadow-md animate-fadeIn">
           <span className="animate-fadeIn">Cerrando sesión...</span>
         </div>
       )}
       <button
-        className="bg-blackPrimary text-white rounded-md px-[0.65rem] sm:px-4 lg:px-7 py-2 lg:py-3 hover:bg-grayPrimary ease-out duration-300 flex items-center"
+        className="bg-blackPrimary h-full text-white rounded-md px-[0.65rem] sm:px-4 lg:px-7 py-2 lg:py-3 hover:bg-grayPrimary ease-out duration-300 flex items-center"
         onClick={handleLogout}
         disabled={isLoggingOut}
       >

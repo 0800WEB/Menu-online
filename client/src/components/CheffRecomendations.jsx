@@ -9,13 +9,15 @@ const CheffRecomendations = () => {
 
     const [listProducts, setListProducts] = useState([])
 
+    const quantityProducts = listProducts.length
+
     useEffect(() => {
         setListProducts(products)
     }, [products])
 
     return (
         <div className="flex flex-col gap-6 w-full">
-            <SectionHeaderWithNav titleChildren={CHEF_RECOMMENDATIONS_TITLE} />
+            <SectionHeaderWithNav titleChildren={CHEF_RECOMMENDATIONS_TITLE} quantity={quantityProducts} />
 
             <div className="h-full w-full overflow-x-auto scrollbar-hide">
                 <div className="h-full flex gap-4 w-max pl-1 pr-2 pb-2">

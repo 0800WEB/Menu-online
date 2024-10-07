@@ -10,14 +10,13 @@ import { handleLogout } from '../contextAuth/handleLogout';
 
 const GoogleLoginButton = () => {
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+
 
     const { login } = useContext(AuthContext);
 
     const dispatch = useDispatch()
 
     const handleSuccess = async (response) => {
-        setLoading(true);
         const token = response.credential;
 
         try {
@@ -39,12 +38,10 @@ const GoogleLoginButton = () => {
             } else {
                 setError('Error al comunicarse con el servidor.');
             }
-        } finally {
-            setLoading(false);
         }
     };
 
-    const handleError = (error) => {
+    const handleError = () => {
         console.log('Falló la autenticación con Google:', error);
         setError('Falló la autenticación. Intenta de nuevo.');
     };

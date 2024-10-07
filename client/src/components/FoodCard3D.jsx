@@ -12,11 +12,11 @@ const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promo
 
     const imageSizeClasses = promoted !== RECOMMENDED_TAG
         ? 'h-[9.5rem] w-full sm:size-[13.3rem]'
-        : 'h-[8.5rem] w-full sm:w-[11.4rem]';
+        : 'h-[8.5rem]  min-w-[11.4rem] sm:w-[11.4rem]';
 
     const containerClasses = promoted !== RECOMMENDED_TAG
         ? 'max-w-[calc(50%-0.5rem)] sm:max-w-[13.3rem]'
-        : 'w-[11.4rem] max-w-[11.4rem] sm:w-[11.4rem]';
+        : 'min-w-[11.4rem] max-w-[11.4rem] sm:w-[11.4rem]';
 
 
     const averageReviewScore = parseInt(calculateAverageScore(reviewScore));

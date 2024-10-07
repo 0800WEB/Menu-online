@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import photoProfileMock from "../assets/images/profileMock.webp";
 import ButtonSecondary from '../components/Buttons/ButtonSecondary';
 import {
-    ORDER_HISTORY_TEXT,
-    EDIT_PROFILE_TEXT,
-    PAYMENT_METHODS_TEXT,
-    ADDRESSES_TEXT,
     LOGOUT_TEXT
 } from "../utils/consts/consts";
 import { handleLogout } from "../contextAuth/handleLogout";
@@ -31,7 +27,7 @@ const Profile = () => {
     }
 
     return (
-        <div className="h-full w-full mx-auto bg-white overflow-y-scroll scrollbar-hide flex flex-col justify-between">
+        <div className="h-full w-full mx-auto bg-white overflow-y-scroll scrollbar-hide flex flex-col justify-center gap-6">
             <div className="flex justify-center pt-5">
                 <img
                     className="w-24 h-24 rounded-full object-cover border-4"
@@ -43,12 +39,6 @@ const Profile = () => {
                 <h2 className="text-2xl font-semibold">{userData.name}</h2>
                 <p className="text-gray-600">{userData.email}</p>
             </div>
-            <div className="px-5 pb-5 flex flex-col w-full items-center gap-5">
-                <ButtonSecondary textChildren={EDIT_PROFILE_TEXT} />
-                <ButtonSecondary textChildren={ORDER_HISTORY_TEXT} />
-                <ButtonSecondary textChildren={PAYMENT_METHODS_TEXT} />
-                <ButtonSecondary textChildren={ADDRESSES_TEXT} />
-            </div>
             <div className="px-5 pb-5">
                 <div className="flex justify-between items-center mb-2">
                     <span>Notificaciones</span>
@@ -56,10 +46,9 @@ const Profile = () => {
                 </div>
                 <div className="flex justify-between items-center mb-2">
                     <span>Idioma</span>
-                    <select className="border border-gray-300 rounded p-1">
-                        {userData.languages && userData.languages.map((language, index) => (
-                            <option key={index}>{language}</option>
-                        ))}
+                    <select className="border border-gray-300 rounded p-1 text-sm [&_option]:text-xs">
+                        <option value="Español">Español</option>
+                        <option value="Inglés">Inglés</option>
                     </select>
                 </div>
             </div>
