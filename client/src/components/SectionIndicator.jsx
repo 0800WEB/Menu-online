@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import ButtonPrimary from './Buttons/ButtonPrimary';
 import { useNavigateHelper } from '../utils/hooks/useNavigateHelper';
 import { getSectionName } from '../utils/functions/getSectionName';
-import { HOME, NOTIFICATIONS } from '../routes/constPath';
+import { HOME, OFFERS } from '../routes/constPath';
 const SectionIndicator = () => {
 
   const { navigateToPath } = useNavigateHelper();
@@ -16,7 +16,7 @@ const SectionIndicator = () => {
       <p className='font-medium'>{sectionName}</p>
       {
         sectionName === 'Menú' ?
-          <ButtonPrimary textChildren={'Recomendados'} className={"!text-sm !py-1 !px-3"} onClick={() => navigateToPath(NOTIFICATIONS)} /> :
+          <ButtonPrimary textChildren={'Recomendados'} className={"!text-sm !py-1 !px-3"} onClick={() => navigateToPath(OFFERS)} /> :
           <ButtonPrimary textChildren={'Menú'} className={"!text-sm !py-1 !px-3"} onClick={() => navigateToPath(HOME)} />
       }
     </div>
