@@ -7,36 +7,30 @@ import { authApiServer } from '../utils/api/consts/auth';
 const GoogleLoginButton = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [successMessage, setSuccessMessage] = useState(''); // estado para el mensaje de éxito
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSuccess = async (response) => {
         setLoading(true);
-        const token = response.credential;
+        const token = response.credential; // Asegúrate de que este token es el correcto
 
-        // enviar el token al backend
         try {
-            const res = await axios.post(`${baseURL}${authApiServer}`, { // Corrige la concatenación
-                token,
-            });
-
-            console.log('usuario autenticado en el backend:', res.data);
+            const res = await axios.post(`${baseURL}${authApiServer}`, { tokenId: token }); // Asegúrate de que la clave sea 'tokenId'
+            console.log('Usuario autenticado en el backend:', res.data);
             localStorage.setItem('authToken', res.data.token);
 
-            // guardar la fecha de expiración (4horas)
+            // Guardar la fecha de expiración (6 horas)
             const expirationDate = new Date();
-            expirationDate.setHours(expirationDate.getHours() + 4);
+            expirationDate.setHours(expirationDate.getHours() + 6);
             localStorage.setItem('tokenExpiration', expirationDate.toISOString());
 
             // Establecer el mensaje de éxito
-            setSuccessMessage('¡Inicio de sesión exitoso!'); // Mensaje de éxito
-
+            setSuccessMessage('¡Inicio de sesión exitoso!');
         } catch (error) {
-            console.error('error al enviar el token al backend:', error);
-            // manejo de errores más detallado
+            console.error('Error al enviar el token al backend:', error);
             if (error.response) {
-                setError('error en la autenticación: ' + error.response.data.message);
+                setError('Error en la autenticación: ' + error.response.data.message);
             } else {
-                setError('error al comunicarse con el servidor.');
+                setError('Error al comunicarse con el servidor.');
             }
         } finally {
             setLoading(false);
@@ -44,32 +38,29 @@ const GoogleLoginButton = () => {
     };
 
     const handleError = (error) => {
-        console.log('falló la autenticación con google:', error);
-        setError('falló la autenticación. intenta de nuevo.');
+        console.log('Falló la autenticación con Google:', error);
+        setError('Falló la autenticación. Intenta de nuevo.');
     };
 
-    // verificar si token expiro
     const isTokenExpired = () => {
         const expirationDate = localStorage.getItem('tokenExpiration');
         return new Date() > new Date(expirationDate);
     };
 
-    // función para manejar el cierre de sesión
     const handleLogout = () => {
-        localStorage.removeItem('authToken'); // eliminar el token
-        localStorage.removeItem('tokenExpiration'); // eliminar la fecha de expiración
-        console.log('usuario cerrado sesión'); // puedes redirigir o mostrar un mensaje aquí
-        setSuccessMessage(''); // Restablecer el mensaje de éxito
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('tokenExpiration');
+        console.log('Usuario cerró sesión');
+        setSuccessMessage('');
     };
 
-    // verificar el estado del token regularmente
     useEffect(() => {
         const interval = setInterval(() => {
             if (isTokenExpired()) {
-                console.error('el token ha expirado. por favor, inicia sesión nuevamente.');
-                handleLogout(); // cerrar sesión si el token ha expirado
+                console.error('El token ha expirado. Por favor, inicia sesión nuevamente.');
+                handleLogout();
             }
-        }, 60000); // verificar cada minuto
+        }, 15000); // Verificar cada minuto
 
         return () => clearInterval(interval);
     }, []);
@@ -81,13 +72,16 @@ const GoogleLoginButton = () => {
                 onError={handleError}
                 cookiePolicy={"single_host_policy"}
             />
-            {loading && <div>cargando...</div>} {/* mostrar mensaje de carga */}
-            {error && <div className="text-red-500">{error}</div>} {/* mostrar error si existe */}
+            {loading && <div>Cargando...</div>}
+            {error && <div className="text-red-500">{error}</div>}
 
-            {/* Mensaje de éxito que ocupa toda la pantalla */}
             {successMessage && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-green-500 text-white text-2xl">
                     {successMessage}
+                    <button
+                        className="ml-3 text-sm font-bold"
+                        onClick={handleLogout}
+                    >Cerrar sesion</button>
                 </div>
             )}
         </div>

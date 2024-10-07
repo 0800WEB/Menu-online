@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
+import authRoutes from './routes/authRoutes.js' ;
 import categoryRoutes from './routes/categoryRoutes.js' ;
 import chatRoutes from './routes/chatRoutes.js' ;
 import productRoutes from './routes/productRoutes.js' ;
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/chatbot', chatRoutes);
 app.use('/api/products', productRoutes);
