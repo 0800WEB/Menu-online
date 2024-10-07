@@ -1,10 +1,27 @@
 import { useState, useRef, useEffect } from 'react';
 import iconSearch from '../assets/svg/search-loupe.svg';
+import { useSelector } from 'react-redux';
+import CardFoodSearch from './CardFoodSearch';
 
 const Buscador = () => {
     const [busqueda, setBusqueda] = useState('');
-    const [isFocused, setIsFocused] = useState(false); // Estado para manejar el foco
-    const searchRef = useRef(null); // Referencia al div contenedor
+    const [isFocused, setIsFocused] = useState(false);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const searchRef = useRef(null);
+
+    const items = useSelector((state) => state.products.items);
+
+    useEffect(() => {
+        if (busqueda) {
+            const lowerCaseBusqueda = busqueda.toLowerCase();
+            const filtered = items.filter(item =>
+                item.foodTitle.toLowerCase().includes(lowerCaseBusqueda)
+            );
+            setFilteredItems(filtered);
+        } else {
+            setFilteredItems([]);
+        }
+    }, [busqueda, items]);
 
     const buscarCard = (e) => {
         setBusqueda(e.target.value);
@@ -20,10 +37,8 @@ const Buscador = () => {
         }
     };
 
-    // Para asegurarnos de que se actualiza el estado al redimensionar
     useEffect(() => {
         const handleResize = () => {
-            // Cuando se redimensiona, se asegura de que el enfoque se mantenga
             if (window.innerWidth >= 640) {
                 setIsFocused(true);
             } else if (!busqueda) {
@@ -40,26 +55,34 @@ const Buscador = () => {
     return (
         <div
             className="search relative md:w-full sm:w-auto"
-            onFocus={handleFocus} // Manejar el foco
-            onBlur={handleBlur} // Manejar la pérdida de foco
-            ref={searchRef} // Asignar referencia al div
-            tabIndex={0} // Hacer que el div sea foco
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            ref={searchRef}
+            tabIndex={0}
         >
-            {/* Icono de búsqueda a la izquierda */}
             <div className={`absolute left-2 top-1/2 transform -translate-y-1/2 transition-opacity duration-300 ${(!isFocused && window.innerWidth < 640) ? 'block' : 'hidden'}`}>
                 <img src={iconSearch} alt="Search Icon" className="w-4 h-4" />
             </div>
 
             <input
                 type="text"
-                placeholder={isFocused || window.innerWidth >= 640 ? "Buscar..." : ""} // Placeholder cuando es mayor que sm
+                placeholder={isFocused || window.innerWidth >= 640 ? "Buscar..." : ""}
                 name="busqueda"
                 autoComplete="off"
-                value={busqueda} // Vincular el estado al valor del input
-                onChange={buscarCard} // Llamar a la función para actualizar el estado
-                className={`bg-grayLight text-blackPrimary rounded-md px-4 py-3 focus:outline-none 
-                    ${isFocused ? 'w-full' : 'w-4 sm:w-full'} transition-all duration-700`} // Cambiar el ancho
+                value={busqueda}
+                onChange={buscarCard}
+                className={`bg-grayLight text-blackPrimary rounded-md px-4 py-3 focus:outline-none   
+                    ${isFocused ? 'w-full' : 'w-4 sm:w-full'} transition-all duration-700`}
             />
+
+
+            {isFocused && filteredItems.length > 0 && (
+                <div className="fixed h-full bg-slate-500 left-0 right-0 flex flex-col gap-4 shadow-lg mt-1 rounded-md overflow-hidden z-50">
+                    {filteredItems.map((item) => (
+                        <CardFoodSearch key={item.id} title={item.foodTitle} image={item.image} price={item.price} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

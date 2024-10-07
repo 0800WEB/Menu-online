@@ -15,7 +15,7 @@ const MenuCatalog = () => {
     }, [products])
 
     return (
-        <div className="h-full overflow-y-scroll scrollbar-hide sm:overflow-auto flex flex-wrap justify-center sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-[1.125rem] sm:gap-x-6 gap-y-2 sm:gap-y-7 justify-items-center">
+        <div className="h-full overflow-y-scroll scrollbar-hide sm:overflow-auto flex flex-wrap gap-4 justify-between sm:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  sm:gap-x-6  sm:gap-y-7 justify-items-center">
             {listProducts.map((menu, index) => (
                 <FoodCard3D
                     id={menu.dataBaseId}

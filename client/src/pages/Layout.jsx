@@ -3,13 +3,14 @@ import Navbar from '../components/Navbar'
 import MobileActionBar from '../components/MobileActionBar'
 import FooterDesktop from '../components/FooterDesktop'
 import SectionIndicator from '../components/SectionIndicator'
-import ScrollDownArrow from '../components/ScrollDownArrow'
 import { fetchListFoods } from '../utils/api/handlersRequests/handlerFoods'
 import { useEffect } from 'react'
 import { setAllProducts } from '../state/slices/products/products'
 import { useDispatch, useSelector } from 'react-redux'
+import ChatButton from '../components/ChatButton'
+
 const Layout = () => {
-    
+
     const dispatch = useDispatch();
 
     const products = useSelector((state) => state.products.items);
@@ -23,11 +24,11 @@ const Layout = () => {
             <header>
                 <Navbar />
             </header>
-            <main className='h-full flex flex-col max-w-full overflow-hidden sm:overflow-visible px-4 sm:px-20 md:px-[8.75rem] py-9 grow sm:grow-0'>
+            <main className='h-full flex flex-col max-w-full overflow-hidden sm:overflow-visible px-4 sm:px-20 md:px-[8.75rem] py-4 grow sm:grow-0'>
                 <SectionIndicator />
                 <Outlet />
-                <ScrollDownArrow />
-
+     
+                <ChatButton />
             </main>
 
             <footer className="w-full sm:h-[10vh] flex items-center">

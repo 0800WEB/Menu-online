@@ -12,8 +12,8 @@ const SectionIndicator = () => {
 
 
   return (
-    <div className="w-full sm:hidden flex justify-between text-sm font-medium pb-7">
-      <p>{sectionName}</p>
+    <div className="w-full sm:hidden flex justify-between text-sm font-medium pb-4">
+      <p className='font-medium'>{sectionName}</p>
       {
         sectionName === 'Menú' ?
           <ButtonPrimary textChildren={'Recomendados'} className={"!text-sm !py-1 !px-3"} onClick={() => navigateToPath(NOTIFICATIONS)} /> :
