@@ -4,7 +4,6 @@ import ReviewForm from "./ReviewForm";
 import RatingDetailFood from "./RatingDetailFood";
 import {
     ARROW_TO_BACK_BUTTON,
-    BUTTON_TEXT_BACK,
     BUTTON_TEXT_LEAVE_REVIEW,
     BUTTON_TEXT_REVIEWS,
     DEFAULT_DESCRIPTION,
@@ -18,12 +17,12 @@ const DetailFood = ({ id, foodTitle, img, description, price, reviewScore, close
 
     const toggleReviewSubmissionModalVisibility = () => {
         setShowReviewForm(!showReviewForm);
-        setShowReviews(false); // Restablecer la vista de reseñas al ocultar el formulario.  
+        setShowReviews(false);
     };
 
     const handleShowReviewsClick = () => {
         setShowReviews(true);
-        setShowReviewForm(false); // Asegúrate de ocultar el formulario al mostrar las reseñas.  
+        setShowReviewForm(false);
     };
 
     return (

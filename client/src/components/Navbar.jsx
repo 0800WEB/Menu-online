@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <section className='overflow-hidden shadow-customMediumToBottom sm:text-sm lg:text-base font-bold'>
-      <nav className='px-4 sm:px-20 lg:px-[8.75rem] flex items-center justify-between gap-4 sm:gap-8 h-28' >
+      <nav className='p-4 sm:px-20 lg:px-[8.75rem] flex items-center justify-between gap-4 sm:gap-8' >
         <div>
           <Link to={HOME}>
             <img className='w-32 sm:w-[9.4rem] h-7 sm:h-8' src={logoFood} alt="Logo Brand" />

@@ -11,7 +11,7 @@ export const DEFAULT_DESCRIPTION = "Descripción del plato no disponible.";
 export const BUTTON_TEXT_REVIEWS = "Reseñas";
 export const BUTTON_TEXT_LEAVE_REVIEW = "Déjanos tu Reseña";
 export const BUTTON_TEXT_BACK = "Volver";
-export const ARROW_TO_BACK_BUTTON = '\u2190'
+export const ARROW_TO_BACK_BUTTON = "\u2190";
 export const PRICE_CURRENCY = "USD";
 
 //Para componente ReviewForm
@@ -33,3 +33,7 @@ export const ORDER_HISTORY_TEXT = "Historial de Pedidos";
 export const PAYMENT_METHODS_TEXT = "Métodos de Pago";
 export const ADDRESSES_TEXT = "Direcciones";
 export const LOGOUT_TEXT = "Cerrar Sesión";
+//Para ChatBot
+export const SENDER_CHEF = "chef";
+export const SENDER_USER = "user";
+export const TITLE_CHATBOT = "Chef";
