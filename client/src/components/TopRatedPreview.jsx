@@ -1,5 +1,4 @@
 import SectionHeaderWithNav from "./SectionHeaderWithNav"
-import { foodCardData } from "../assets/other-assets/mookMenus"
 import FoodCard3D from "./FoodCard3D";
 import { BEST_RATED_PRODUCTS_TITLE, RECOMMENDED_TAG } from "../utils/consts/consts";
 import { useSelector } from "react-redux";
@@ -17,7 +16,7 @@ const TopRatedPreview = () => {
     return (
         <div className='flex flex-col gap-7 '>
             <SectionHeaderWithNav titleChildren={BEST_RATED_PRODUCTS_TITLE} />
-            <div className="h-full w-full overflow-x-auto">
+            <div className="h-full w-full overflow-x-auto scrollbar-hide">
                 <div className="h-full flex gap-4 w-max pl-1 pr-2 pb-2">
                     {listProducts.map((menu, index) => (
                         <FoodCard3D

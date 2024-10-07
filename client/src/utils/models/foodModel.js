@@ -6,12 +6,12 @@ const reviews = [
   },
   {
     user: "UsuarioB",
-    score: 4,
+    score: 5,
     opinion: "Muy bueno, aunque algunas piezas estaban un poco saladas.",
   },
   {
     user: "UsuarioC",
-    score: 4.5,
+    score: 5,
     opinion: "Me encantó la variedad y la presentación.",
   },
 ];

@@ -8,6 +8,7 @@ import {
     ADDRESSES_TEXT,
     LOGOUT_TEXT
 } from "../utils/consts/consts";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 const Profile = () => {
     const USER_NAME = userMock.name;
@@ -38,7 +39,7 @@ const Profile = () => {
 
     return (
         <div className="h-full  w-full mx-auto bg-white  overflow-y-scroll scrollbar-hide flex flex-col justify-between">
-            <div className="flex justify-center pt-5">
+            {/* <div className="flex justify-center pt-5">
                 <img
                     className="w-24 h-24 rounded-full object-cover border-4 border-orange-500"
                     src={photoProfileMock}
@@ -71,7 +72,8 @@ const Profile = () => {
             </div>
             <div className="px-5 pb-5 mx-auto">
                 <ButtonSecondary textChildren={LOGOUT_TEXT} onClick={handleLogout} className="w-full bg-red-500 text-white hover:bg-red-600" />
-            </div>
+            </div> */}
+            <GoogleLoginButton />
         </div>
     );
 };
