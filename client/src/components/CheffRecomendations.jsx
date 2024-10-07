@@ -1,11 +1,10 @@
 import SectionHeaderWithNav from "./SectionHeaderWithNav"
 import FoodCard3D from "./FoodCard3D";
-import { PROMOTION_TITLE, RECOMMENDED_TAG } from "../utils/consts/consts";
+import { CHEF_RECOMMENDATIONS_TITLE, RECOMMENDED_TAG } from "../utils/consts/consts";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const PromotionsPreview = () => {
-
+const CheffRecomendations = () => {
     const products = useSelector((state) => state.products.items);
 
     const [listProducts, setListProducts] = useState([])
@@ -16,7 +15,7 @@ const PromotionsPreview = () => {
 
     return (
         <div className="flex flex-col gap-6 w-full">
-            <SectionHeaderWithNav titleChildren={PROMOTION_TITLE} />
+            <SectionHeaderWithNav titleChildren={CHEF_RECOMMENDATIONS_TITLE} />
 
             <div className="h-full w-full overflow-x-auto scrollbar-hide">
                 <div className="h-full flex gap-4 w-max pl-1 pr-2 pb-2">
@@ -38,4 +37,4 @@ const PromotionsPreview = () => {
     )
 }
 
-export default PromotionsPreview;
+export default CheffRecomendations

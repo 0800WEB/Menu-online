@@ -1,5 +1,6 @@
 export const PROMOTION_TITLE = "Descuentos";
 export const BEST_RATED_PRODUCTS_TITLE = "Mejores Calificados";
+export const CHEF_RECOMMENDATIONS_TITLE = "Sugerencias del Chef";
 
 //Para componente Card3D
 export const RECOMMENDED_TAG = "recommended"; //Para las cards que utlizaran dos tipos de Tags para el diseño de las Card3D , este seria para los descuentos o recomendados, cambiaria los estilos

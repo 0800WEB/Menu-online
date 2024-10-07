@@ -5,7 +5,6 @@ import DetailFood from './DetailFood'
 import { RECOMMENDED_TAG } from '../utils/consts/consts'
 import { calculateAverageScore } from '../utils/functions/caculateScoreFood'
 import '../styles/slideUp.css'
-import { useNavigate } from 'react-router-dom'
 
 const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promoted }) => {
 
@@ -13,17 +12,17 @@ const FoodCard3D = ({ id, foodTitle, img, description, price, reviewScore, promo
 
     const imageSizeClasses = promoted !== RECOMMENDED_TAG
         ? 'h-[9.5rem] w-full sm:size-[13.3rem]'
-        : 'h-[7.5rem] w-40 sm:w-[11.4rem]';
+        : 'h-[8.5rem] w-full sm:w-[11.4rem]';
 
     const containerClasses = promoted !== RECOMMENDED_TAG
         ? 'max-w-[calc(50%-0.5rem)] sm:max-w-[13.3rem]'
-        : 'max-w-[calc(50%-0.5rem)] sm:w-[11.4rem]';
+        : 'w-[11.4rem] max-w-[11.4rem] sm:w-[11.4rem]';
 
 
     const averageReviewScore = parseInt(calculateAverageScore(reviewScore));
 
     return (
-        <div className={`${containerClasses} w-full h-max`} >
+        <div className={`${containerClasses} w-full h-max max-w-`} >
             <div className={` flex flex-col sm:gap-2 rounded-custom-1 w-full h-max shadow-md overflow-hidden pb-1 sm:pb-2 bg-white bg-opacity-40`} onClick={() => setOpenDetails(!openDetails)}>
                 <div className={`relative ${imageSizeClasses} overflow-hidden`}>
                     <img className='object-cover size-full' src={img} alt={`${foodTitle} image`} loading="lazy" />
