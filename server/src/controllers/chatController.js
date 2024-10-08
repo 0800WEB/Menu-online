@@ -1,9 +1,18 @@
-let conversationHistory = [];
+let conversations = {}; // Objeto para almacenar el historial de cada usuario por su userId
 const port = process.env.PORT || 3000;
 
 const chatController = async (req, res) => {
-  const { message } = req.body;
-  
+  const { message, userId } = req.body;
+
+  // Si no existe un historial para el userId, se inicializa con un array vacío
+  if (!conversations[userId]) {
+    conversations[userId] = [];
+  }
+
+  // Obtener el historial de conversación del usuario actual
+  let conversationHistory = conversations[userId];
+
+  // Si es la primera vez que el usuario interactúa, cargar los productos y configurar el mensaje del sistema
   if (conversationHistory.length === 0) {
     const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.BASE_URL_PRODUCTION}/api/products` : `http://localhost:${port}/api/products`;
     const productsResponse = await fetch(baseURL);
@@ -16,13 +25,15 @@ const chatController = async (req, res) => {
     const productsDescriptions = products.map(product => `${product.category} - ${product.name} - ${product.price} - ${product.diet_type} : ${product.description}.`).join('\n');
     
     const systemMessages = [
-      { role: "system", content: "Eres un chatbot para un restaurante llamado 'Menu-Online-BACK'." },
+      { role: "system", content: "Eres un chatbot especializado en responder únicamente preguntas relacionadas con el restaurante llamado 'FOOD.' Responder de la forma mas corta y consistente." },
       { role: "system", content: `Estos son los platos disponibles: ${productsDescriptions} ` }
     ];
 
+    // Almacenar los mensajes iniciales en el historial de conversación del usuario
     conversationHistory.push(...systemMessages);
   }
 
+  // Agregar el mensaje del usuario al historial
   conversationHistory.push({ role: "user", content: `El cliente pregunta: "${message}"` });
 
   try {
@@ -35,7 +46,7 @@ const chatController = async (req, res) => {
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
         messages: conversationHistory,
-        max_tokens: 150,
+        max_tokens: 100,
         temperature: 0.7,
       }),
     });
@@ -48,7 +59,11 @@ const chatController = async (req, res) => {
     const data = await response.json();
     const botResponse = data.choices[0].message.content.trim();
 
+    // Agregar la respuesta del bot al historial de conversación del usuario
     conversationHistory.push({ role: "assistant", content: botResponse });
+
+    // Actualizar el historial del usuario en el objeto de conversaciones
+    conversations[userId] = conversationHistory;
 
     res.json({ response: botResponse });
   } catch (error) {

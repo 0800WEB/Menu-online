@@ -14,6 +14,8 @@ const Chatbot = ({ closeChatBot }) => {
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState("");
     const messagesEndRef = useRef(null); // Ref para el final del contenedor de mensajes
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const userId = userData._id;
 
     const handleSend = async () => {
         if (input.trim()) {
@@ -24,7 +26,8 @@ const Chatbot = ({ closeChatBot }) => {
 
             try {
                 const response = await axiosInstace.post(API_CHATBOT_SERVER, {
-                    message: input
+                    message: input,
+                    userId: userId
                 });
                 console.log(response)
                 const botMessage = { text: response.data.response, sender: SENDER_CHEF };
