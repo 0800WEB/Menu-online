@@ -1,7 +1,5 @@
 
-# Backend para el Menú Online
-
-Este proyecto es el backend para un sistema de menú online. Permite gestionar productos, usuarios, categorías y reseñas.
+# Backend
 
 ## Tecnologías Utilizadas
 
@@ -9,22 +7,25 @@ Este proyecto es el backend para un sistema de menú online. Permite gestionar p
 - **Express.js**: Framework para crear aplicaciones web y APIs en Node.js.
 - **MongoDB**: Base de datos NoSQL utilizada para almacenar los datos.
 - **Mongoose**: ODM para manejar la base de datos MongoDB desde Node.js.
-- **node --env-file .env**: Manejo de variables de entorno. (node v20+)
-- **node --watch**: Reinicia automáticamente el servidor al detectar cambios en el código. (node v20+)
+- **node --env-file .env**: Manejo de variables de entorno utilizando el soporte nativo de Node.js v20+.
+- **node --watch**: Reinicia automáticamente el servidor al detectar cambios en el código, facilitando el desarrollo en Node.js.
+- **bcrypt**: Biblioteca para el cifrado de contraseñas, proporcionando seguridad en el manejo de credenciales.
+- **cors**: Middleware para habilitar el intercambio de recursos entre dominios, permitiendo el acceso a la API desde diferentes orígenes.
+- **google-auth-library**: Biblioteca que facilita la autenticación y autorización con los servicios de Google, comúnmente utilizada para la autenticación con OAuth 2.0.
+- **jsonwebtoken**: Biblioteca para generar y verificar tokens JWT (JSON Web Tokens), utilizada para la autenticación y autorización de usuarios.
+- **openai**: Biblioteca que permite la integración con la API de OpenAI para utilizar modelos de inteligencia artificial, como ChatGPT.
 
 ## Instalación
 
-1. Clona el repositorio:
+1. Instala las dependencias:
    ```bash
-   git clone https://github.com/0800WEB/Menu-Online-BACK.git
+   cd server
    ```
-
-2. Instala las dependencias:
    ```bash
    npm install
    ```
 
-3. Configura las variables de entorno:
+2. Configura las variables de entorno:
 - **Pedir las variables de entorno al administrador de la organizacion**
 
 ## Ejecución
@@ -38,20 +39,6 @@ Esto iniciará el servidor.
 
 ## Estructura de Rutas
 
-### Rutas para Productos
-- **GET** `/api/products`: Obtiene todos los productos.
-- **POST** `/api/products`: Crea un nuevo producto.
-- **GET** `/api/products/:id`: Obtiene un producto específico.
-- **PUT** `/api/products/:id`: Actualiza un producto existente.
-- **DELETE** `/api/products/:id`: Elimina un producto.
-
-### Rutas para Usuarios
-- **POST** `/api/users`: Crea un nuevo usuario.
-- **GET** `/api/users`: Obtiene todos los usuarios.
-- **GET** `/api/users/:id`: Obtiene un usuario específico.
-- **PUT** `/api/users/:id`: Actualiza un usuario existente.
-- **DELETE** `/api/users/:id`: Elimina un usuario.
-
 ### Rutas para Categorías
 - **POST** `/api/categories`: Crea una nueva categoría.
 - **GET** `/api/categories`: Obtiene todas las categorías.
@@ -59,12 +46,29 @@ Esto iniciará el servidor.
 - **PUT** `/api/categories/:id`: Actualiza una categoría existente.
 - **DELETE** `/api/categories/:id`: Elimina una categoría.
 
-### Rutas para Reseñas (Reviews)
+### Ruta para el Chat Bot
+- **POST** `/api/chatbot`: Crear y enviar un nuevo prompt.
+
+### Rutas para Productos
+- **GET** `/api/products`: Obtiene todos los productos.
+- **POST** `/api/products`: Crea un nuevo producto.
+- **GET** `/api/products/:id`: Obtiene un producto específico.
+- **PUT** `/api/products/:id`: Actualiza un producto existente.
+- **DELETE** `/api/products/:id`: Elimina un producto.
+
+### Rutas para Reseñas
 - **POST** `/api/reviews`: Crea una nueva reseña.
 - **GET** `/api/reviews`: Obtiene todas las reseñas.
 - **GET** `/api/reviews/:id`: Obtiene una reseña específica.
 - **PUT** `/api/reviews/:id`: Actualiza una reseña existente.
 - **DELETE** `/api/reviews/:id`: Elimina una reseña.
+
+### Rutas para Usuarios
+- **POST** `/api/users`: Crea un nuevo usuario.
+- **GET** `/api/users`: Obtiene todos los usuarios.
+- **GET** `/api/users/:id`: Obtiene un usuario específico.
+- **PUT** `/api/users/:id`: Actualiza un usuario existente.
+- **DELETE** `/api/users/:id`: Elimina un usuario.
 
 ## Base de Datos
 
@@ -90,12 +94,14 @@ La base de datos utilizada es MongoDB. El esquema básico incluye las siguientes
 ### users:
    - name: { type: String, required: true }
    - email: { type: String, required: true, unique: true }
-   - password: { type: String, required: true }
+   - password: { type: String }
    - notification: { type: Boolean, default: false }
    - daily_notification: { type: Boolean, default: false }
    - review_quality: { type: Number, default: 0 }
    - user_type: { type: String, enum: ['client', 'admin', 'owner'], required: true }
    - image: { type: String, default: 'no image' }
+   - googleId: { type: String, unique: true, sparse: true },
+   - provider: { type: String, enum: ['local', 'google'], default: 'local' }
 
 ### categories:
    - id: { type: Number, required: true, unique: true }
