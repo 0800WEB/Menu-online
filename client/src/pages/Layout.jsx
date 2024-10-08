@@ -1,4 +1,3 @@
-// src/pages/Layout.js
 import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import MobileActionBar from '../components/MobileActionBar';
@@ -18,12 +17,12 @@ const Layout = () => {
     const products = useSelector((state) => state.products.items);
     const { isAuthenticated } = useContext(AuthContext);
 
-   
+
     useEffect(() => {
-        if (isAuthenticated) {  
+        if (isAuthenticated) {
             fetchListFoods(products, dispatch, setAllProducts);
         }
-    }, [dispatch, products, isAuthenticated]); 
+    }, [dispatch, products, isAuthenticated]);
 
     return (
         <div className="flex flex-col h-screen">
@@ -45,7 +44,7 @@ const Layout = () => {
                     </footer>
                 </>
             ) : (
-                <div className="flex justify-center items-center h-full px-4"> {/* Centrar el Login */}
+                <div className="flex justify-center items-center h-full px-4">
                     <Login />
                 </div>
             )}

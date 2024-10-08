@@ -1,17 +1,20 @@
 let conversationHistory = [];
+const port = process.env.PORT || 3000;
 
 const chatController = async (req, res) => {
   const { message } = req.body;
   
   if (conversationHistory.length === 0) {
-    const productsResponse = await fetch('http://localhost:4000/api/products');
+    const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.BASE_URL_PRODUCTION}/api/products` : `http://localhost:${port}/api/products`;
+    const productsResponse = await fetch(baseURL);
+
     if (!productsResponse.ok) {
       throw new Error('Error al obtener los productos.');
     }
 
     const products = await productsResponse.json();
     const productsDescriptions = products.map(product => `${product.category} - ${product.name} - ${product.price} - ${product.diet_type} : ${product.description}.`).join('\n');
-
+    
     const systemMessages = [
       { role: "system", content: "Eres un chatbot para un restaurante llamado 'Menu-Online-BACK'." },
       { role: "system", content: `Estos son los platos disponibles: ${productsDescriptions} ` }
