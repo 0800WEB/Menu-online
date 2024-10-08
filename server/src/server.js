@@ -6,8 +6,12 @@ async function startServer() {
   try {
     await connectDB(); 
     app.listen(port, () => {
-      console.log(`Server running at http://localhost:${port}`);
+      const baseUrl = process.env.NODE_ENV === 'production'
+        ? `${process.env.BASE_URL_PRODUCTION}`
+        : `http://localhost:${port}`;
+      console.log(`Server running at ${baseUrl}`);
     });
+    
   } catch (error) {
     console.error('Error starting the server:', error);
     process.exit(1);
