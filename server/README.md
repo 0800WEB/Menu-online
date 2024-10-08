@@ -7,8 +7,6 @@
 - **Express.js**: Framework para crear aplicaciones web y APIs en Node.js.
 - **MongoDB**: Base de datos NoSQL utilizada para almacenar los datos.
 - **Mongoose**: ODM para manejar la base de datos MongoDB desde Node.js.
-- **node --env-file .env**: Manejo de variables de entorno utilizando el soporte nativo de Node.js v20+.
-- **node --watch**: Reinicia automáticamente el servidor al detectar cambios en el código, facilitando el desarrollo en Node.js.
 - **bcrypt**: Biblioteca para el cifrado de contraseñas, proporcionando seguridad en el manejo de credenciales.
 - **cors**: Middleware para habilitar el intercambio de recursos entre dominios, permitiendo el acceso a la API desde diferentes orígenes.
 - **google-auth-library**: Biblioteca que facilita la autenticación y autorización con los servicios de Google, comúnmente utilizada para la autenticación con OAuth 2.0.
@@ -20,13 +18,11 @@
 1. Instala las dependencias:
    ```bash
    cd server
-   ```
-   ```bash
    npm install
    ```
 
 2. Configura las variables de entorno:
-- **Pedir las variables de entorno al administrador de la organizacion**
+   - **Pedir las variables de entorno al administrador de la organización**
 
 ## Ejecución
 
@@ -81,42 +77,42 @@ La base de datos utilizada es MongoDB. El esquema básico incluye las siguientes
 
 ## Schemas de la base de datos
 
-### products:
-   - id: { type: Number, required: true, unique: true }
-   - name: { type: String, required: true }
-   - image: { type: String }
-   - array_images: { type: [String] }
-   - description: { type: String }
-   - price: { type: Number, required: true }
-   - diet_type: { type: String, enum: ['celiac', 'carnivore', 'vegetarian', 'vegan', 'no_diet_type'], default: 'no_diet_type' }
-   - category_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true }
+### `categories`:
+   - `id`: { type: Number, required: true, unique: true }
+   - `name`: { type: String, required: true }
 
-### users:
-   - name: { type: String, required: true }
-   - email: { type: String, required: true, unique: true }
-   - password: { type: String }
-   - notification: { type: Boolean, default: false }
-   - daily_notification: { type: Boolean, default: false }
-   - review_quality: { type: Number, default: 0 }
-   - user_type: { type: String, enum: ['client', 'admin', 'owner'], required: true }
-   - image: { type: String, default: 'no image' }
-   - googleId: { type: String, unique: true, sparse: true },
-   - provider: { type: String, enum: ['local', 'google'], default: 'local' }
+### `products`:
+   - `id`: { type: Number, required: true, unique: true }
+   - `name`: { type: String, required: true }
+   - `image`: { type: String }
+   - `array_images`: { type: [String] }
+   - `description`: { type: String }
+   - `price`: { type: Number, required: true }
+   - `diet_type`: { type: String, enum: ['celiac', 'carnivore', 'vegetarian', 'vegan', 'no_diet_type'], default: 'no_diet_type' }
+   - `category_id`: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true }
 
-### categories:
-   - id: { type: Number, required: true, unique: true }
-   - name: { type: String, required: true }
+### `reviews`:
+   - `id`: { type: Number, required: true, unique: true }
+   - `product_id`: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true }
+   - `user_id`: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+   - `comment`: { type: String, required: true }
+   - `qualification`: { type: Number, required: true }
 
-### reviews:
-   - id: { type: Number, required: true, unique: true }
-   - product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true }
-   - user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
-   - comment: { type: String, required: true }
-   - qualification: { type: Number, required: true }
+### `users`:
+   - `name`: { type: String, required: true }
+   - `email`: { type: String, required: true, unique: true }
+   - `password`: { type: String }
+   - `notification`: { type: Boolean, default: false }
+   - `daily_notification`: { type: Boolean, default: false }
+   - `review_quality`: { type: Number, default: 0 }
+   - `user_type`: { type: String, enum: ['client', 'admin', 'owner'], required: true }
+   - `image`: { type: String, default: 'no image' }
+   - `googleId`: { type: String, unique: true, sparse: true }
+   - `provider`: { type: String, enum: ['local', 'google'], default: 'local' }
 
 ## Postman
 
-Puedes encontrar la colección de Postman para probar las APIs en el siguiente enlace: 
+Puedes encontrar la colección de Postman para probar las APIs en el siguiente enlace:
 ```plaintext
 https://www.postman.com/tobiasguerreroteam/workspace/menu-online-back
 ```
@@ -124,3 +120,4 @@ https://www.postman.com/tobiasguerreroteam/workspace/menu-online-back
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Mira el archivo [LICENSE](LICENSE) para más detalles.
+
